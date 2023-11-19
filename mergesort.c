@@ -20,52 +20,52 @@ int main() {
     return 0;
 }
 
+
 void mergesort(int vet[], int inicio, int fim){
     if (inicio < fim) {
         int meio = (inicio + fim) / 2;
         mergesort(vet, inicio, meio);
         mergesort(vet, meio + 1, fim);
 
-        int i, j, k;
+        int i = 0, j = 0, k;
         int tam1 = meio - inicio + 1;
         int tam2 = fim - meio;
 
-        int *esq = malloc(tam1 * sizeof(int));
-        int *dir = malloc(tam2 * sizeof(int));
+        int *esquerda = malloc(tam1 * sizeof(int));
+        int *direita = malloc(tam2 * sizeof(int));
 
         for (i = 0; i < tam1; i++)
-            esq[i] = vet[inicio + i];
+            esquerda[i] = vet[inicio + i];
         for (j = 0; j < tam2; j++)
-            dir[j] = vet[meio + 1 + j];
+            direita[j] = vet[meio + 1 + j];
 
-        i = 0;
-        j = 0;
+       
         k = inicio;
 
         while (i < tam1 && j < tam2) {
-            if (esq[i] <= dir[j]) {
-                vet[k] = esq[i];
+            if (esquerda[i] <= direita[j]) {
+                vet[k] = esquerda[i];
                 i++;
             } else {
-                vet[k] = dir[j];
+                vet[k] = direita[j];
                 j++;
             }
             k++;
         }
 
         while (i < tam1) {
-            vet[k] = esq[i];
+            vet[k] = esquerda[i];
             i++;
             k++;
         }
 
         while (j < tam2) {
-            vet[k] = dir[j];
+            vet[k] = direita[j];
             j++;
             k++;
         }
 
-        free(esq);
-        free(dir);
+        free(esquerda);
+        free(direita);
     }
 }
